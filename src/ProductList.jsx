@@ -291,18 +291,24 @@ function ProductList({ onHomeClick }) {
                 <div className="product-grid">
                     {plantsArray.map((category, index) => (
                         <div key={index}>
-                            <h1>{category.categor}</h1>
+                            <h1 className='plantname_heading'><div className='plant_heading'>{category.category}</div></h1>
                             <div className='product-list'>
-                                {category.plants.map((plant, plantIndex) => {
+                                {category.plants.map((plant, plantIndex) => (
                                     <div className='product-card' key={plantIndex}>
-                                        <img className='product-image' src={plant.image} alt={plant.name}></img>
-                                        <h2 className="product-title">{plant.name}</h2>
-                                        <h3>{plant.cost}</h3>
-                                        <p>{plant.description}</p>
+                                        <img className='product-image' src={plant.image} alt={plant.name} />
+                                        <div className="product-title">{plant.name}</div>
+                                        <div className='product-cost'>{plant.cost}</div>
+                                        <div>{plant.description}</div>
 
-                                        <button className='product-button' onClick={() => handleAddToCart(plant)}>Add To Cart</button>
+                                        <button
+                                            className={addedToCart[plant.name] ? 'product-button added-to-cart' : 'product-button'}
+                                            onClick={() => handleAddToCart(plant)}
+                                            disabled={addedToCart[plant.name]}
+                                        >
+                                            {addedToCart[plant.name] ? 'Added to Cart' : 'Add to Cart'}
+                                        </button>
                                     </div>
-                                })}
+                                ))}
                             </div>
                         </div>
                     ))}
